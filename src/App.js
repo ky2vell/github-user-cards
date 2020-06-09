@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
 import UserCard from './components/users/UserCard';
 import Followers from './components/followers/Followers';
+import { Container } from 'reactstrap';
 import './App.css';
 
 export class App extends Component {
@@ -26,14 +28,15 @@ export class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <Header />
+        <Container>
           <Route exact path='/'>
             <UserCard users={this.state.users} />
           </Route>
           <Route exact path='/following'>
             <Followers />
           </Route>
-        </div>
+        </Container>
       </Router>
     );
   }

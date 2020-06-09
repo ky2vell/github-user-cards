@@ -1,0 +1,12 @@
+body,
+.loading {
+  padding-top: 6rem;
+}
+.navbar-brand {
+  font-size: 2rem !important;
+}
+.badge {
+  padding: 1.25em 1.4em !important;
+  margin-bottom: 0.8em;
+  margin-right: 0.8em;
+}

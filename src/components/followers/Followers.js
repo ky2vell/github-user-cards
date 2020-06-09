@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import FollowerCard from '../followers/FollowerCard';
 import LoadingPage from '../layout/LoadingPage';
+import { Container, Row } from 'reactstrap';
 
 export class Followers extends Component {
   state = {
@@ -28,13 +29,17 @@ export class Followers extends Component {
 
   render() {
     return this.state.isLoading ? (
-      <LoadingPage />
+      <Container className='d-flex justify-content-center loading'>
+        <LoadingPage />
+      </Container>
     ) : (
-      <>
-        {this.state.followers.map(follower => (
-          <FollowerCard key={follower.id} follower={follower} />
-        ))}
-      </>
+      <Container>
+        <Row>
+          {this.state.followers.map(follower => (
+            <FollowerCard key={follower.id} follower={follower} />
+          ))}
+        </Row>
+      </Container>
     );
   }
 }
