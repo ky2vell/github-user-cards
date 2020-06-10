@@ -18,7 +18,7 @@ export class Followers extends Component {
     this.setState({ isLoading: true });
 
     let res = await axios.get(
-      'https://api.github.com/users/gaearon/followers',
+      `https://api.github.com/users/${this.props.text}/followers`,
       {
         headers: { Authorization: process.env.ACCESS_TOKEN }
       }

@@ -9,12 +9,13 @@ import './App.css';
 
 export class App extends Component {
   state = {
-    users: {}
+    users: {},
+    text: 'gaearon'
   };
 
   componentDidMount() {
     axios
-      .get('https://api.github.com/users/gaearon', {
+      .get(`https://api.github.com/users/${this.state.text}`, {
         headers: { Authorization: process.env.ACCESS_TOKEN }
       })
       .then(res => {
@@ -25,16 +26,35 @@ export class App extends Component {
       });
   }
 
+  searchUsers = input => {
+    axios
+      .get(`https://api.github.com/users/${input}`, {
+        headers: { Authorization: process.env.ACCESS_TOKEN }
+      })
+      .then(res => {
+        this.setState({ users: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+
+  setURL = input => {
+    return this.setState({ text: input });
+  };
+
   render() {
     return (
       <Router>
         <Header />
         <Container>
           <Route exact path='/'>
-            <UserCard users={this.state.users} />
+            <UserCard
+              users={this.state.users}
+              setURL={this.setURL}
+              searchUsers={this.searchUsers}
+            />
           </Route>
           <Route exact path='/following'>
-            <Followers />
+            <Followers text={this.state.text} />
           </Route>
         </Container>
       </Router>
